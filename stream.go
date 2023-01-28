@@ -104,13 +104,15 @@ func (str *Stream) getSubIndex(sub *Subscriber) int {
 }
 
 // addSubscriber will create a new subscriber on a stream
-func (str *Stream) addSubscriber(eventid int, url *url.URL) *Subscriber {
+func (str *Stream) addSubscriber(eventid int, url *url.URL, userAgent, ip string) *Subscriber {
 	atomic.AddInt32(&str.subscriberCount, 1)
 	sub := &Subscriber{
 		eventid:    eventid,
 		quit:       str.deregister,
 		connection: make(chan *Event, 64),
 		URL:        url,
+		UserAgent:  userAgent,
+		IP:         ip,
 	}
 
 	if str.isAutoStream {

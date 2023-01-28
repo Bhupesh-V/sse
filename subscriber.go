@@ -13,6 +13,8 @@ type Subscriber struct {
 	removed    chan struct{}
 	eventid    int
 	URL        *url.URL
+	UserAgent  string
+	IP         string
 }
 
 // Close will let the stream know that the clients connection has terminated
